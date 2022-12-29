@@ -1,10 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
+import Login from "../Login/Login";
 import About from "../Pages/About/About";
 import PostDetailes from "../Pages/Detailes/PostDetailes";
 import Home from "../Pages/Home/Home";
 import Media from "../Pages/Media/Media";
 import Message from "../Pages/Message/Message";
+import Register from "../Register/Register";
+import PrivateRoute from "./PrivateRoute";
 
 export const routes = createBrowserRouter([
     {
@@ -16,6 +19,16 @@ export const routes = createBrowserRouter([
                 element:<Home></Home>
             },
             {
+                path:'/login',
+                element:<Login></Login>
+                
+              },
+              {
+                path:'/register',
+                element:<Register></Register>
+                
+              },
+            {
                 path:'/Message',
                 element:<Message></Message>
             },
@@ -25,7 +38,7 @@ export const routes = createBrowserRouter([
             },
             {
                 path:'/posts/:id',
-                element:<PostDetailes></PostDetailes>,
+                element:<PrivateRoute><PostDetailes></PostDetailes></PrivateRoute>,
                 loader:({params})=>fetch(`http://localhost:5000/posts/${params.id}`)          
                 
               },

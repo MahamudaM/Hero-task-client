@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+
 
 const AddPosts = () => {
     const {register,handleSubmit,formState: { errors },} = useForm();
@@ -38,7 +39,7 @@ fetch(url,{
        .then(res=>res.json())
        .then(result=>{
          console.log(result)
-        //  toast.success(`add post successfully`)        
+         toast(`add post successfully`)        
        })
     }
 })
@@ -68,6 +69,7 @@ fetch(url,{
       </div>
 
     </form> 
+    <ToastContainer/>
         </div>
     );
 };

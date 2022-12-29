@@ -1,16 +1,36 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Context/AuthProvider';
 
 const Hader = () => {
+  const {user,logOut}=useContext(AuthContext)
+
+
+const logOutHandler =()=>{
+  logOut()
+  .then(()=>{})
+  .catch(err=>console.log(err))
+}
     const menuItem = <>
     <li><Link to='/'>Home</Link></li>
     <li><Link to='/Message'>Message</Link></li>
     <li><Link to='/media'>Media</Link></li>
     <li><Link to='/about'>About</Link></li>
+    {
+    user?.uid? 
+    <>
+    <li><button onClick={logOutHandler}> Log Out</button></li>
    
     </>
+    :
+<>
+<li><Link to ='/login'>Log in</Link></li>
+<li><Link to ='/register'>Regiester</Link></li>
+</>
+   }
+    </>
     return (
-        <div>
+        <div className='max-w-6xl mx-auto'>
          <div className="navbar bg-base-100">
   <div className="navbar-start">
     <div className="dropdown">
@@ -21,7 +41,7 @@ const Hader = () => {
         {menuItem}
       </ul>
     </div>
-    <Link className="btn btn-ghost normal-case text-xl">daisyUI</Link>
+    <p className="btn bg-[#ff5200] normal-case text-xl">Network</p>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
@@ -29,7 +49,7 @@ const Hader = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <Link className="btn">Get started</Link>
+    {/* <Link className="btn">Get started</Link> */}
   </div>
 </div>
         </div>

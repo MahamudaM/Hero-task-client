@@ -10,7 +10,7 @@ const MediaCard = ({post}) => {
   <figure><img src={postImg} alt="Shoes" /></figure>
   <div className="card-body">
     
-    <p>{descip}</p>
+    <p>{descip.slice(0,80) + '.....'}</p>
     <div className="card-actions justify-end">
       <Link to={`/posts/${_id}`}><button className="btn bg-[#ff5200]">Details</button></Link>
       
