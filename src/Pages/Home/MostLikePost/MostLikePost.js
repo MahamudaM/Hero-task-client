@@ -26,13 +26,13 @@ const {descip,postImg,_id,comment,likes} = likepost
     return (
         <div>
                   <div className="card w-96 bg-base-100 shadow-xl mx-auto">
-  <figure><img src={postImg} alt="Shoes" /></figure>
+  <figure><img src={likepost?._id?.postImg} alt="Shoes" /></figure>
   <div className="card-body">
     
-    <p>{descip}</p>
+    <p>{likepost?._id?.descip}</p>
     <div className="card-actions justify-between">       
         {/* <button className="btn bg-[#ff5200]"> */}
-       {likes?.length? <p>{ likes?.length} likes</p>  : 0 + "likes"}  
+     { likepost?.len} <p>likes</p> 
        {comment?.length? <p>{comment?.length} comment</p> : 0 + "comment" }            
     </div>
 

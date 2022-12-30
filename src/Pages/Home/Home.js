@@ -13,6 +13,7 @@ const {data:likePosts }=useQuery({
     queryKey:['posts'],
     queryFn:async()=>{
         try{
+            // https://hero-job-task-server.vercel.app/likePosts
             const res =await fetch('https://hero-job-task-server.vercel.app/likePosts')
             const data = await res.json();
             return data;
