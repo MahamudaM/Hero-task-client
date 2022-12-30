@@ -8,7 +8,7 @@ const {data:posts}=useQuery({
     queryKey:['posts'],
     queryFn:async()=>{
         try{
-            const res =await fetch('http://localhost:5000/posts')
+            const res =await fetch('https://hero-job-task-server.vercel.app/posts')
             const data = await res.json();
             return data;
         }
@@ -23,7 +23,7 @@ console.log(posts)
     return (
         <div className='my-10 max-w-6xl mx-auto'>
           
-            <p>Media {posts?.length}</p>
+            
             <div className="flex flex-col gap-12">
             {
                 posts?.map(post=><MediaCard key={post._id} post={post}></MediaCard>)

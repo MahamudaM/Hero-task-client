@@ -11,7 +11,7 @@ const About = () => {
         queryKey:['users',user?.email],
         queryFn:async()=>{
             try{
-                const res =await fetch(`http://localhost:5000/users?email=${user?.email}`)
+                const res =await fetch(`https://hero-job-task-server.vercel.app/users?email=${user?.email}`)
                 const data = await res.json();
                 return data;
             }
@@ -39,7 +39,7 @@ const About = () => {
     const email =form.email.value;
   
    
-    fetch(`http://localhost:5000/users/${loginUser._id}`,{
+    fetch(`https://hero-job-task-server.vercel.app/users/${loginUser._id}`,{
       method:'PUT',
       headers:{
         'content-type':'application/json'

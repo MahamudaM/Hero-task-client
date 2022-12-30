@@ -39,7 +39,7 @@ export const routes = createBrowserRouter([
             {
                 path:'/posts/:id',
                 element:<PrivateRoute><PostDetailes></PostDetailes></PrivateRoute>,
-                loader:({params})=>fetch(`http://localhost:5000/posts/${params.id}`)          
+                loader:({params})=>fetch(`https://hero-job-task-server.vercel.app/posts/${params.id}`)          
                 
               },
             {

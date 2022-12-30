@@ -60,7 +60,7 @@ const googleHandler =()=>{
 // send user in mongodb
 const saveUser = (email,name,university,address)=>{
   const user = {email,name,university,address}
-  fetch(`http://localhost:5000/users`,{
+  fetch(`https://hero-job-task-server.vercel.app/users`,{
     method:'POST',
     headers:{
       'content-type':'application/json'
