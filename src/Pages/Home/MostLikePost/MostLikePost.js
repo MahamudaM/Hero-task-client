@@ -1,16 +1,15 @@
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
 const MostLikePost = ({likepost}) => {
-const {descip,postImg,_id,comment,likes} = likepost
+  console.log(likepost)
+
 
  // send commet mongodb
  const addCommentHandl=event=>{
     event.preventDefault();
  const form =event.target;    
-    const comment =form.comment.value;           
-    fetch(`https://hero-job-task-server.vercel.app/posts/${_id}`,{
+    const comment =form.comment.value;          
+    fetch(`https://hero-job-task-server.vercel.app/posts/${likepost?._id?._id}`,{
       method:'PUT',
       headers:{
         'content-type':'application/json'
@@ -20,20 +19,20 @@ const {descip,postImg,_id,comment,likes} = likepost
     .then(res=>res.json())
     .then(data=>{
       console.log(data)
-  
+  form.reset()
            })
   }
     return (
         <div>
-                  <div className="card w-96 bg-base-100 shadow-xl mx-auto">
+                  <div className="card w-4/5 mx-auto bg-base-100 shadow-xl ">
   <figure><img src={likepost?._id?.postImg} alt="Shoes" /></figure>
   <div className="card-body">
     
-    <p>{likepost?._id?.descip}</p>
+    <p>{likepost?.postInfo?.descip}</p>
     <div className="card-actions justify-between">       
         {/* <button className="btn bg-[#ff5200]"> */}
      { likepost?.len} <p>likes</p> 
-       {comment?.length? <p>{comment?.length} comment</p> : 0 + "comment" }            
+       {likepost?._id?.comment?.length }  <p> comment </p>            
     </div>
 
     {/* <p>{likes?.length} likes</p> */}
@@ -43,18 +42,7 @@ const {descip,postImg,_id,comment,likes} = likepost
     </form>
   </div>
 </div>
- {/* see coment */}
- <p className='text-xl text-center my-5'> See All comment</p>
-{
-    comment?.map((com,i)=><div key={i}  className="card w-96 bg-base-100 shadow-xl mb-5 mx-auto">
-         <div className="card-body">
-    <div className="card-actions justify-end">
-    </div>
-    <p>{com}</p>
-   
-  </div>
-    </div>)
-    }
+
         </div>
     );
 };

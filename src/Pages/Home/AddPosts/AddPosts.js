@@ -1,11 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const AddPosts = () => {
-    const {register,handleSubmit,formState: { errors },} = useForm();
-    const refresh = () => window.location.reload(true)
+    const {register,handleSubmit,formState: { errors },reset} = useForm();
 const imgHostKey = process.env.REACT_APP_ImageBB_Key
 
 const addPostHandler =data =>{
@@ -30,6 +30,7 @@ fetch(url,{
           date
 
         }
+        
        fetch('https://hero-job-task-server.vercel.app/posts',{
         method:"POST",
       headers:{
@@ -40,8 +41,8 @@ fetch(url,{
        .then(res=>res.json())
        .then(result=>{
          console.log(result)
-         refresh()
-               
+         reset()
+         toast("Post added");   
        })
     }
 })
@@ -71,7 +72,7 @@ fetch(url,{
       </div>
 
     </form> 
-    
+    <ToastContainer />
         </div>
     );
 };

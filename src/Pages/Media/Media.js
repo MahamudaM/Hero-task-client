@@ -4,7 +4,7 @@ import React from 'react';
 import MediaCard from './MediaCard';
 
 const Media = () => {
-const {data:posts}=useQuery({
+const {data:posts,isLoading}=useQuery({
     queryKey:['posts'],
     queryFn:async()=>{
         try{
@@ -20,6 +20,9 @@ const {data:posts}=useQuery({
 
 })
 console.log(posts)
+if(isLoading){
+    return <button className="btn loading text-center">loading</button>
+  }
     return (
         <div className='my-10 max-w-6xl mx-auto'>
           

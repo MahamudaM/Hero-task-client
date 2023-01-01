@@ -1,16 +1,35 @@
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 
 
 const PostDetailes = () => {
-    const post = useLoaderData()
-   const {user} =useContext(AuthContext)
-    const {descip,postImg,_id,comment,likes}=post
-    const refresh = () => window.location.reload(true)
+  const {user} =useContext(AuthContext)
+    const { id } = useParams(); 
+const {data:post,isLoading,refetch }=useQuery({
+  queryKey:['posts',id],
+  queryFn:async()=>{
+      try{
+          const res =await fetch( `https://hero-job-task-server.vercel.app/posts/${id}`)
+          const data = await res.json();
+          return data;
+      }
+      catch(error){
 
+      }
+  
+  }
+
+})
+
+if(isLoading){
+  return <button className="btn loading">loading</button>
+}
+    const {descip,postImg,_id,comment,likes}=post
+    
     // send commet mongodb
     const addCommentHandl=event=>{
         event.preventDefault();
@@ -26,7 +45,8 @@ const PostDetailes = () => {
         .then(res=>res.json())
         .then(data=>{
           console.log(data)
-          refresh()
+          refetch()
+          form.reset()
                })
       }
 
@@ -43,7 +63,7 @@ const PostDetailes = () => {
         .then(res=>res.json())
         .then(data=>{
           console.log(data)
-          refresh()
+          refetch()
        
         })
       }
@@ -58,7 +78,7 @@ const PostDetailes = () => {
     <p>{descip}</p>
     <div className="card-actions justify-end">       
        
-        <FontAwesomeIcon onClick={()=>addLike (user.email)} icon={faThumbsUp} className="mr-2 text-[#ff5200] h-6"/>
+        <FontAwesomeIcon onClick={()=>addLike (user?.email)} icon={faThumbsUp} className="mr-2 text-[#ff5200] h-6"/>
           {comment?.length? <p>{comment?.length} comment</p> : 0 + "comment" }              
     </div>
 

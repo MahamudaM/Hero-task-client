@@ -3,6 +3,7 @@ import Main from "../Layout/Main";
 import Login from "../Login/Login";
 import About from "../Pages/About/About";
 import PostDetailes from "../Pages/Detailes/PostDetailes";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home";
 import Media from "../Pages/Media/Media";
 import Message from "../Pages/Message/Message";
@@ -13,6 +14,7 @@ export const routes = createBrowserRouter([
     {
         path:'/',
         element:<Main></Main>,
+        errorElement:<ErrorPage></ErrorPage>,
         children:[
             {
                 path:'/',
@@ -39,13 +41,14 @@ export const routes = createBrowserRouter([
             {
                 path:'/posts/:id',
                 element:<PrivateRoute><PostDetailes></PostDetailes></PrivateRoute>,
-                loader:({params})=>fetch(`https://hero-job-task-server.vercel.app/posts/${params.id}`)          
+                         
                 
               },
             {
                 path:'/about',
                 element:<About></About>
             },
+            
         ]
     }
 ])

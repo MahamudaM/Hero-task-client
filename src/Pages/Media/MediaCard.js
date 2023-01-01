@@ -6,11 +6,11 @@ const MediaCard = ({post}) => {
     console.log(post)
     return (
         <div>
-            <div className="card w-96 bg-base-100 shadow-xl mx-auto">
+            <div className="card  w-3/4  bg-base-100 shadow-xl mx-auto">
   <figure><img src={postImg} alt="Shoes" /></figure>
   <div className="card-body">
     
-    <p>{descip.slice(0,80) + '.....'}</p>
+    <p>{descip}</p>
     <div className="card-actions justify-end">
       <Link to={`/posts/${_id}`}><button className="btn bg-[#ff5200]">Details</button></Link>
       

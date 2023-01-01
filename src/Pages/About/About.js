@@ -1,8 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
-
+import profilimg from '../../Assets/img/profil.webp'
+import bannar from '../../Assets/img/aboutimg.jpg'
 import { AuthContext } from '../../Context/AuthProvider';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const About = () => {
     const {user}=useContext(AuthContext)
   
@@ -50,9 +54,9 @@ const About = () => {
     .then(data=>{
       console.log(data)
       refetch()
-    //  if(data.modifiedCount>0){
-    //   toast("Update successfully");
-    //  }
+     if(data.modifiedCount>0){
+      toast("Update user successfully");
+     }
     })
   }
     return (
@@ -64,19 +68,35 @@ user?.uid?
           <div>
           <div className="grid justify-end ">           
             {/* The button to open modal */}
-<label  htmlFor="userUpdateModal" className="btn ">edit</label>
+<label  htmlFor="userUpdateModal" className="btn text-[#ff5200]"><FontAwesomeIcon icon={faEdit} className="mr-2 text-[#ff5200] h-4"/>edit</label>
            </div>
-           {/* card */}
-           <div className="card w-96 bg-base-100 shadow-xl mx-auto">
+           {/* info card */}
+           <div className="flex-auto mb-4" >
+           <div className="card  w-96 mx-auto  bg-base-100 shadow-xl">
+  <figure style={{position: 'avsolute'}}><img src={bannar} alt="Shoes" /></figure>
+  {/* avater */}
+  <div className="avatar " style={{position: 'relative',bottom: '42px',
+    left: '161px'}}> 
+   
+  <div className="w-24 rounded-full">
+    <img src={profilimg}  alt='profil img'/>
+  </div>
+</div>
+  {/* avater end */}
   <div className="card-body items-center text-center">
-    <h2 className="card-title">Name : {loginUser?.name}</h2>
-    <p>Email: {loginUser?.email}</p>
+    <h2 className="card-title">
+   {user?.displayName}
+        </h2>
+    <p>{user?.email}</p>
+    <p> {loginUser?.university}</p>
+     <p> {loginUser?.address}</p>
     <div className="card-actions justify-end">
-     <p>University : {loginUser?.university}</p>
-     <p>Address : {loginUser?.address}</p>
+     
     </div>
   </div>
 </div>
+           </div>
+          
 {/* modal */}
 
 <input type="checkbox" id="userUpdateModal" className="modal-toggle" />
@@ -115,7 +135,7 @@ user?.uid?
 </div> 
 
       <div className="form-control mt-6">
-      <input className=" bg-primary input input-bordered w-full  text-white" value="Save" type="submit" />
+      <input className=" bg-[#ff5200] input input-bordered w-full  text-white" value="Save" type="submit" />
       </div>     
     </form>
    
@@ -125,7 +145,7 @@ user?.uid?
           :
           <p className='text-4xl text-center'>No  Log in user</p>
            }
-
+<ToastContainer />
         </div>
     );
 };
